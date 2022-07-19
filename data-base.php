@@ -1,5 +1,7 @@
 <?php
 
+// aller voir le .env pour le lancement du serveur on utilise DB_USER=... et DB_PASSWORD=... et sensuite php -S localhost:3000
+
 $dns = 'mysql:host=localhost;dbname=blog';
 $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
