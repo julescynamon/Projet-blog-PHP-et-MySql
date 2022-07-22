@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/data/data-base.php';
+
 $authDb = require_once __DIR__ . '/data/security.php';
 
 $sessionId = $_COOKIE['session'];

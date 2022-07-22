@@ -1,5 +1,5 @@
 <?php
-require_once './data/data-base.php';
+
 $authDb = require __DIR__ . "/data/security.php";
 const ERROR_REQUIRED = 'Veuillez renseigner ce champ';
 const ERROR_PASSWORD_TOO_SHORT = 'Le mot de passe doit faire au moins 6 caractères';
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php require_once 'includes/header.php' ?>
         <div class="content">
             <div class="block p-20 form-container">
-                <h1>Inscription</h1>
+                <h1>Connexion</h1>
                 <form action="/auth-login.php" , method="POST">
                     <div class="form-control">
                         <label for="email">Email</label>

@@ -1,9 +1,9 @@
 <?php
-require_once './data/data-base.php';
+
 $authDB = require_once __DIR__ . '/data/security.php';
 const ERROR_REQUIRED = 'Veuillez renseigner ce champ';
 const ERROR_TOO_SHORT = 'Ce champ est trop court';
-const ERROR_PASSWORD_TOO_SHORT = 'Le mot de passe doit faire au moins 6 caractères';
+const ERROR_PASSWORD = 'Le mot de passe doit faire au moins 6 caractères, avoir un chiffre et avoir au moins une majuscule et une minuscule';
 const ERROR_PASSWORD_MISMATCH = 'Le mot de passe de confirmation est différent';
 const ERROR_EMAIL_INVALID = 'L\'email n\'est pas valide';
 
@@ -41,11 +41,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['email'] = ERROR_REQUIRED;
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = ERROR_EMAIL_INVALID;
+    } elseif ($authDB->getUserFromEmail($email)) {
+        $errors['email'] = 'Cet email est déjà utilisé';
     }
+
+    function check_mdp_format($mdp)
+    {
+        $majuscule = preg_match('@[A-Z]@', $mdp);
+        $minuscule = preg_match('@[a-z]@', $mdp);
+        $chiffre = preg_match('@[0-9]@', $mdp);
+
+        if (!$majuscule || !$minuscule || !$chiffre || strlen($mdp) < 6) {
+            return false;
+        }
+    }
+
+
     if (!$password) {
         $errors['password'] = ERROR_REQUIRED;
-    } elseif (mb_strlen($password) < 6) {
-        $errors['password'] = ERROR_PASSWORD_TOO_SHORT;
+    } elseif (check_mdp_format($password) != true) {
+        $errors['password'] = ERROR_PASSWORD;
     }
     if (!$confirmpassword) {
         $errors['confirmpassword'] = ERROR_REQUIRED;

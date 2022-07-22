@@ -17,11 +17,31 @@
 
 .articles-list ul li {
     display: flex;
-    align-items: center;
+    flex-flow: row;
     justify-content: space-between;
-    margin-bottom: 10px;
     padding: 15px;
     border-radius: 3px;
     background-color: white;
     border: var(--border);
+    margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+    .articles-list ul li {
+        flex-flow: column;
+    }
+
+    .article-actions {
+        margin-top: 1rem;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .articles-list ul li {
+        flex-flow: column;
+    }
+
+    .article-actions {
+        margin-top: 1rem;
+    }
 }

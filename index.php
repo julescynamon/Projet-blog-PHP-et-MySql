@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/data/data-base.php';
+
 $authDb = require __DIR__ . "/data/security.php";
 
 $currentUser = $authDb->isLoggedin();

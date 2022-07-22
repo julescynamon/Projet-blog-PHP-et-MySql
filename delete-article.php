@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/data/data-base.php';
-require_once __DIR__ . '/data/security.php';
-$currentUser = isLoggedin();
+
+$authDb = require_once __DIR__ . '/data/security.php';
+$currentUser = $authDb->isLoggedin();
 
 if ($currentUser) {
 
