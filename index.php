@@ -1,9 +1,9 @@
 <?php
 
 require __DIR__ . '/data/data-base.php';
-require __DIR__ . "/data/security.php";
+$authDb = require __DIR__ . "/data/security.php";
 
-$currentUser = isLoggedin();
+$currentUser = $authDb->isLoggedin();
 
 $articleDB = require __DIR__ .  '/./data/models/ArticleDB.php';
 $articles = $articleDB->fetchAll();

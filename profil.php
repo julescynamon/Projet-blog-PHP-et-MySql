@@ -1,11 +1,11 @@
 <?php
 
 require_once __DIR__ . '/data/data-base.php';
-require_once __DIR__ . '/data/security.php';
+$authDb = require_once __DIR__ . '/data/security.php';
 $articleDB = require_once __DIR__ . '/data/models/ArticleDB.php';
 
 $articles = [];
-$currentUser = isLoggedin();
+$currentUser = $authDb->isLoggedin();
 if (!$currentUser) {
     header('Location: /');
 }
@@ -54,8 +54,8 @@ $articles = $articleDB->fetchUserArticle($currentUser['id']);
                         <li>
                             <span><?= $article['title'] ?></span>
                             <div class="article-action">
-                                <button class="btn btn-primary btn-small">Mofifier</button>
-                                <button class="btn btn-secondary btn-small">Supprimez</button>
+                                <a href="/form-article.php?id=<?= $article['id'] ?>" class="btn btn-primary btn-small">Mofifier</a>
+                                <a href="/delete-article.php?id=<?= $article['id'] ?>" class="btn btn-secondary btn-small">Supprimez</a>
                             </div>
                         </li>
                     <?php endforeach ?>
